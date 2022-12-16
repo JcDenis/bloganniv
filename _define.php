@@ -1,27 +1,32 @@
 <?php
-# ***** BEGIN LICENSE BLOCK *****
-#
-# This file is part of DotClear.
-#
-# Plugin Bloganniv by Francis Trautmann
-# Contributor: Pierre Van Glabeke
-# Licensed under the GPL version 2.0 license.
-# A copy of this license is available in LICENSE file at
-# http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
-#
-# ***** END LICENSE BLOCK *****
-if (!defined('DC_RC_PATH')) { return; }
+/**
+ * @brief bloganniv, a plugin for Dotclear 2
+ *
+ * @package Dotclear
+ * @subpackage Plugin
+ *
+ * @author Fran6t, Pierre Van Glabeke and Contributors
+ *
+ * @copyright Jean-Crhistian Denis
+ * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
+ */
+if (!defined('DC_RC_PATH')) {
+    return null;
+}
+
 $this->registerModule(
-	/* Name */				"Blog Anniv",
-	/* Description*/		"Counting the number of days before and after a particular date",
-	/* Author */			"Fran6t, Pierre Van Glabeke",
-	/* Version */			'1.5.1',
-	/* Properties */
-	array(
-		'permissions' => 'blogAnniv',
-		'type' => 'plugin',
-		'dc_min' => '2.7',
-		'support' => 'http://www.myouaibe.com/index.php/post/2007/08/23/Plugin-BlogAnniv-pour-DOTCLEAR-2',
-		'details' => 'http://plugins.dotaddict.org/dc2/details/bloganniv'
-		)
+    'Blog Anniv',
+    'Counting the number of days before and after a particular date',
+    'Fran6t, Pierre Van Glabeke and Contributors',
+    '1.6',
+    [
+        'requires'    => [['core', '2.24']],
+        'permissions' => dcCore::app()->auth->makePermissions([
+            dcAuth::PERMISSION_ADMIN,
+        ]),
+        'type'       => 'plugin',
+        'support'    => 'https://github.com/JcDenis/' . basename(__DIR__),
+        'details'    => 'https://plugins.dotaddict.org/dc2/details/' . basename(__DIR__),
+        'repository' => 'https://raw.githubusercontent.com/JcDenis/' . basename(__DIR__) . '/master/dcstore.xml',
+    ]
 );
