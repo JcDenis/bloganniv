@@ -1,3 +1,7 @@
+2.0 - 2023.04.11
+* require Dotclear 2.26
+* use namespace
+
 1.6 - 2022.12.16
 * update to dotclear 2.24
 * fix phpstan errors

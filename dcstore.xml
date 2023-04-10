@@ -2,11 +2,11 @@
 <modules xmlns:da="http://dotaddict.org/da/">
   <module id="bloganniv">
     <name>Blog Anniv</name>
-    <version>1.6</version>
+    <version>2.0</version>
     <author>Fran6t, Pierre Van Glabeke and Contributors</author>
     <desc>Counting the number of days before and after a particular date</desc>
-    <file>https://github.com/JcDenis/bloganniv/releases/download/v1.6/plugin-bloganniv.zip</file>
-    <da:dcmin>2.24</da:dcmin>
+    <file>https://github.com/JcDenis/bloganniv/releases/download/v2.0/plugin-bloganniv.zip</file>
+    <da:dcmin>2.26</da:dcmin>
     <da:details>https://plugins.dotaddict.org/dc2/details/bloganniv</da:details>
     <da:support>https://github.com/JcDenis/bloganniv</da:support>
   </module>
