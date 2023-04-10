@@ -7,23 +7,26 @@
  *
  * @author Fran6t, Pierre Van Glabeke and Contributors
  *
- * @copyright Jean-Crhistian Denis
+ * @copyright Jean-Christian Denis
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
-if (!defined('DC_RC_PATH')) {
-    return null;
-}
+declare(strict_types=1);
 
-dcCore::app()->addBehavior('initWidgets', ['blogAnnivWidgets', 'initWidgets']);
+namespace Dotclear\Plugin\bloganniv;
 
-class blogAnnivWidgets
+use dcCore;
+use Dotclear\Helper\Html\Html;
+use Dotclear\Plugin\widgets\WidgetsStack;
+use Dotclear\Plugin\widgets\WidgetsElement;
+
+class Widgets
 {
-    public static function initWidgets($w)
+    public static function initWidgets(WidgetsStack $w): void
     {
         $w->create(
-            'blogAnniv',
-            __('Blog Anniv'),
-            ['blogAnnivWidgets', 'BlogAnnivWidget'],
+            My::id(),
+            My::name(),
+            [self::class, 'parseWidget'],
             null,
             __('Counting the number of days before and after a particular date')
         )
@@ -37,14 +40,10 @@ class blogAnnivWidgets
         ->addOffline();
     }
 
-    public static function BlogAnnivWidget($w)
+    public static function parseWidget(WidgetsElement $w): string
     {
-        if ($w->offline) {
-            return null;
-        }
-
-        if (!$w->checkHomeOnly(dcCore::app()->url->type)) {
-            return null;
+        if ($w->offline || !$w->checkHomeOnly(dcCore::app()->url->type)) {
+            return '';
         }
 
         $ftdatecrea = $w->ftdatecrea;
@@ -93,8 +92,8 @@ class blogAnnivWidgets
         }
 
         return $w->renderDiv(
-            $w->content_only,
-            'bloganniv ' . $w->class,
+            (bool) $w->content_only,
+            My::id() . ' ' . $w->class,
             '',
             ($w->title ? $w->renderTitle(html::escapeHTML($w->title)) : '') .
             '<ul>' .
