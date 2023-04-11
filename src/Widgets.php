@@ -95,7 +95,7 @@ class Widgets
             (bool) $w->content_only,
             My::id() . ' ' . $w->class,
             '',
-            ($w->title ? $w->renderTitle(html::escapeHTML($w->title)) : '') .
+            ($w->title ? $w->renderTitle(Html::escapeHTML($w->title)) : '') .
             '<ul>' .
             ($w->dispyearborn ? '<li>' . __('Born:') . ' <span class="annivne">' . $ftdatecrea . '</span></li>' : '') .
             ($w->dispyear ? '<li>' . __('Age:') . ' <span class="annivan">' . $nbreannee . '</span> ' . __('year(s)') . '</li>' : '') .
