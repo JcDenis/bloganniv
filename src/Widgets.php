@@ -46,6 +46,11 @@ class Widgets
             return '';
         }
 
+        // nullsafe PHP < 8.0
+        if (is_null(dcCore::app()->blog)) {
+            return '';
+        }
+
         $ftdatecrea = $w->ftdatecrea;
         //Si la date est vide nous recherchons la date en base
         if (strlen(rtrim($ftdatecrea)) == 0) {
