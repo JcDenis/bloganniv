@@ -42,7 +42,7 @@ class Widgets
 
     public static function parseWidget(WidgetsElement $w): string
     {
-        if ($w->offline || !$w->checkHomeOnly(dcCore::app()->url->type)) {
+        if ($w->__get('offline') || !$w->checkHomeOnly(dcCore::app()->url->type)) {
             return '';
         }
 
@@ -51,7 +51,7 @@ class Widgets
             return '';
         }
 
-        $ftdatecrea = $w->ftdatecrea;
+        $ftdatecrea = $w->__get('ftdatecrea');
         //Si la date est vide nous recherchons la date en base
         if (strlen(rtrim($ftdatecrea)) == 0) {
             $jour       = date('d', dcCore::app()->blog->creadt);
@@ -97,13 +97,13 @@ class Widgets
         }
 
         return $w->renderDiv(
-            (bool) $w->content_only,
-            My::id() . ' ' . $w->class,
+            (bool) $w->__get('content_only'),
+            My::id() . ' ' . $w->__get('class'),
             '',
-            ($w->title ? $w->renderTitle(Html::escapeHTML($w->title)) : '') .
+            ($w->__get('title') ? $w->renderTitle(Html::escapeHTML($w->__get('title'))) : '') .
             '<ul>' .
-            ($w->dispyearborn ? '<li>' . __('Born:') . ' <span class="annivne">' . $ftdatecrea . '</span></li>' : '') .
-            ($w->dispyear ? '<li>' . __('Age:') . ' <span class="annivan">' . $nbreannee . '</span> ' . __('year(s)') . '</li>' : '') .
+            ($w->__get('dispyearborn') ? '<li>' . __('Born:') . ' <span class="annivne">' . $ftdatecrea . '</span></li>' : '') .
+            ($w->__get('dispyear') ? '<li>' . __('Age:') . ' <span class="annivan">' . $nbreannee . '</span> ' . __('year(s)') . '</li>' : '') .
             '<li>' . __('Birthday in') . ' <span class="annivjrs">' . $nbrejours . '</span> ' . __('day(s)') . '</li>' .
             '</ul>'
         );
