@@ -30,7 +30,7 @@ class Widgets
             null,
             __('Counting the number of days before and after a particular date')
         )
-        ->addTitle('')
+        ->addTitle(My::name())
         ->setting('ftdatecrea', __('Born Date (dd/mm/yyyy) or blank:'), '')
         ->setting('dispyearborn', __('Display Born Date'), 1, 'check')
         ->setting('dispyear', __('Display Year(s) Old'), 1, 'check')
