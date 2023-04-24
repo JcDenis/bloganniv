@@ -1,3 +1,8 @@
+2.1 - 2023.04.24
+* require Dotclear 2.26
+* fix nullsafe warnings
+* remove magic
+
 2.0 - 2023.04.11
 * require Dotclear 2.26
 * use namespace
