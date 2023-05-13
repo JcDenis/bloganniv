@@ -1,3 +1,7 @@
+2.2 - 2023.05.13
+* require Dotclear 2.26
+* release for Dotclear 2.26 stable
+
 2.1 - 2023.04.24
 * require Dotclear 2.26
 * fix nullsafe warnings

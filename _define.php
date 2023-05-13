@@ -18,7 +18,7 @@ $this->registerModule(
     'Blog Anniv',
     'Counting the number of days before and after a particular date',
     'Fran6t, Pierre Van Glabeke and Contributors',
-    '2.1',
+    '2.2',
     [
         'requires'    => [['core', '2.26']],
         'permissions' => dcCore::app()->auth->makePermissions([
