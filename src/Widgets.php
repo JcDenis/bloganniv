@@ -90,7 +90,7 @@ class Widgets
                 $nbrejours = abs($timestamp2 - $timestamp1) / 86400;
                 $nbreannee = abs($annee2 - $annee - 1);
             }
-        // abs($timestamp2 - $timestamp1)/(86400*7); //Affichage du nombre de semaine : 3.85
+            // abs($timestamp2 - $timestamp1)/(86400*7); //Affichage du nombre de semaine : 3.85
         } else {
             // date invalide
             return '';
