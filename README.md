@@ -3,7 +3,7 @@
 [![Release](https://img.shields.io/github/v/release/JcDenis/bloganniv)](https://github.com/JcDenis/bloganniv/releases)
 [![Date](https://img.shields.io/github/release-date/JcDenis/bloganniv)](https://github.com/JcDenis/bloganniv/releases)
 [![Issues](https://img.shields.io/github/issues/JcDenis/bloganniv)](https://github.com/JcDenis/bloganniv/issues)
-[![Dotclear](https://img.shields.io/badge/dotclear-v2.26-blue.svg)](https://fr.dotclear.org/download)
+[![Dotclear](https://img.shields.io/badge/dotclear-v2.27-blue.svg)](https://fr.dotclear.org/download)
 [![Dotaddict](https://img.shields.io/badge/dotaddict-official-green.svg)](https://plugins.dotaddict.org/dc2/details/bloganniv)
 [![License](https://img.shields.io/github/license/JcDenis/bloganniv)](https://github.com/JcDenis/bloganniv/blob/master/LICENSE)
 
@@ -22,7 +22,7 @@ It adds widget showing:
  _bloganniv_ requires: 
 
   * permissions to manage widgets
-  * Dotclear 2.26
+  * Dotclear 2.27
 
 ## USAGE
 
@@ -34,8 +34,8 @@ Add and configure "Blog anniv" from widgets manager.
 ## LINKS
 
  * License : [GNU GPL v2](https://www.gnu.org/licenses/old-licenses/lgpl-2.0.html)
- * Source & contribution : [GitHub Page](https://github.com/JcDenis/bloganniv)
- * Packages & details : [Dotaddict Page](https://plugins.dotaddict.org/dc2/details/bloganniv)
+ * Source & contribution : [Gitea Page](https://git.dotclear.watch/JcDenis/bloganniv) or [GitHub Page](https://github.com/JcDenis/bloganniv)
+ * Packages & details : [Gitea Page](https://git.dotclear.watch/JcDenis/bloganniv/releases) or [Dotaddict Page](https://plugins.dotaddict.org/dc2/details/bloganniv)
 
 ## CONTRIBUTORS
 
