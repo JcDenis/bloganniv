@@ -1,24 +1,22 @@
 <?php
-/**
- * @brief bloganniv, a plugin for Dotclear 2
- *
- * @package Dotclear
- * @subpackage Plugin
- *
- * @author Fran6t, Pierre Van Glabeke and Contributors
- *
- * @copyright Jean-Christian Denis
- * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
- */
+
 declare(strict_types=1);
 
 namespace Dotclear\Plugin\bloganniv;
 
-use dcCore;
+use Dotclear\App;
 use Dotclear\Helper\Html\Html;
 use Dotclear\Plugin\widgets\WidgetsStack;
 use Dotclear\Plugin\widgets\WidgetsElement;
 
+/**
+ * @brief       bloganniv widgets class.
+ * @ingroup     bloganniv
+ *
+ * @author      Fran6t (author)
+ * @author      Jean-Christian Denis (latest)
+ * @copyright   GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
+ */
 class Widgets
 {
     public static function initWidgets(WidgetsStack $w): void
@@ -26,7 +24,7 @@ class Widgets
         $w->create(
             My::id(),
             My::name(),
-            [self::class, 'parseWidget'],
+            self::parseWidget(...),
             null,
             __('Counting the number of days before and after a particular date')
         )
@@ -42,22 +40,20 @@ class Widgets
 
     public static function parseWidget(WidgetsElement $w): string
     {
-        if ($w->__get('offline') || !$w->checkHomeOnly(dcCore::app()->url->type)) {
-            return '';
-        }
-
-        // nullsafe PHP < 8.0
-        if (is_null(dcCore::app()->blog)) {
+        if ($w->__get('offline')
+            || !$w->checkHomeOnly(App::url()->type)
+            || !App::blog()->isDefined()
+        ) {
             return '';
         }
 
         $ftdatecrea = $w->__get('ftdatecrea');
         //Si la date est vide nous recherchons la date en base
         if (strlen(rtrim($ftdatecrea)) == 0) {
-            $jour       = date('d', dcCore::app()->blog->creadt);
-            $mois       = date('m', dcCore::app()->blog->creadt);
-            $annee      = date('Y', dcCore::app()->blog->creadt);
-            $ftdatecrea = date('d/m/Y', dcCore::app()->blog->creadt);
+            $jour       = date('d', App::blog()->creadt());
+            $mois       = date('m', App::blog()->creadt());
+            $annee      = date('Y', App::blog()->creadt());
+            $ftdatecrea = date('d/m/Y', App::blog()->creadt());
         } else {
             [$jour, $mois, $annee] = explode('/', $ftdatecrea);
         }
