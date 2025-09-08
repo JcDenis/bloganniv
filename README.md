@@ -3,7 +3,7 @@
 
 [![Release](https://img.shields.io/github/v/release/jcdenis/bloganniv?color=lightblue)](https://github.com/JcDenis/bloganniv/releases)
 ![Date](https://img.shields.io/github/release-date/jcdenis/bloganniv?color=red)
-[![Dotclear](https://img.shields.io/badge/dotclear-v2.33-137bbb.svg)](https://fr.dotclear.org/download)
+[![Dotclear](https://img.shields.io/badge/dotclear-v2.36-137bbb.svg)](https://fr.dotclear.org/download)
 [![Dotaddict](https://img.shields.io/badge/dotaddict-official-9ac123.svg)](https://plugins.dotaddict.org/dc2/details/bloganniv)
 [![License](https://img.shields.io/github/license/jcdenis/bloganniv?color=white)](https://github.com/JcDenis/bloganniv/blob/master/LICENSE)
 
@@ -15,7 +15,7 @@ _bloganniv_ is a plugin for the open-source web publishing software called [Dotc
 
 ## REQUIREMENTS
 
-* Dotclear 2.28
+* Dotclear 2.36
 * PHP 8.1+
 * Dotclear permission to manage widgets
 
