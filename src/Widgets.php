@@ -41,19 +41,19 @@ class Widgets
     public static function parseWidget(WidgetsElement $w): string
     {
         if ($w->__get('offline')
-            || !$w->checkHomeOnly(App::url()->type)
+            || !$w->checkHomeOnly(App::url()->getType())
             || !App::blog()->isDefined()
         ) {
             return '';
         }
 
-        $ftdatecrea = $w->__get('ftdatecrea');
+        $ftdatecrea = is_string($w->__get('ftdatecrea')) ? $w->__get('ftdatecrea') : '';
         //Si la date est vide nous recherchons la date en base
         if (strlen(rtrim($ftdatecrea)) == 0) {
             $jour       = date('d', App::blog()->creadt());
             $mois       = date('m', App::blog()->creadt());
             $annee      = date('Y', App::blog()->creadt());
-            $ftdatecrea = date('d/m/Y', App::blog()->creadt());
+            $ftdatecrea = (string) date('d/m/Y', App::blog()->creadt());
         } else {
             [$jour, $mois, $annee] = explode('/', $ftdatecrea);
         }
@@ -94,9 +94,9 @@ class Widgets
 
         return $w->renderDiv(
             (bool) $w->__get('content_only'),
-            My::id() . ' ' . $w->__get('class'),
+            My::id() . (is_string($w->__get('class')) ? ' ' . $w->__get('class') : ''),
             '',
-            ($w->__get('title') ? $w->renderTitle(Html::escapeHTML($w->__get('title'))) : '') .
+            (is_string($w->__get('title')) && !empty($w->__get('title')) ? $w->renderTitle(Html::escapeHTML($w->__get('title'))) : '') .
             '<ul>' .
             ($w->__get('dispyearborn') ? '<li>' . __('Born:') . ' <span class="annivne">' . $ftdatecrea . '</span></li>' : '') .
             ($w->__get('dispyear') ? '<li>' . __('Age:') . ' <span class="annivan">' . $nbreannee . '</span> ' . __('year(s)') . '</li>' : '') .
