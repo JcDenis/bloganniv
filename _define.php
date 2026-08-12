@@ -22,7 +22,7 @@ $this->registerModule(
     'Blog Anniv',
     'Show number of days before and after a given date',
     'Fran6t, Pierre Van Glabeke and Contributors',
-    '2.5',
+    '2.6',
     [
         'requires'    => [['core', '2.39']],
         'permissions' => 'My',
