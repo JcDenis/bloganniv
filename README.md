@@ -13,6 +13,8 @@ _bloganniv_ is a plugin for the open-source web publishing software called [Dotc
 
 > Show number of days before and after a given date
 
+A [user guide in French](https://github.com/JcDenis/bloganniv/blob/master/docs/fr/utilisation.md) is available.
+
 ## REQUIREMENTS
 
 * Dotclear 2.39
@@ -33,6 +35,7 @@ It adds widget showing:
 
 ## LINKS
 
+* [User guide (in French)](https://github.com/JcDenis/bloganniv/blob/master/docs/fr/utilisation.md)
 * [License](https://github.com/JcDenis/bloganniv/blob/master/LICENSE)
 * [Packages & details](https://github.com/JcDenis/bloganniv/releases) (or on [Repository](https://dotclear.org/plugin/detail/bloganniv))
 * [Sources & contributions](https://github.com/JcDenis/bloganniv)
