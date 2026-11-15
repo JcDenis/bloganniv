@@ -53,9 +53,9 @@ Voici le widget sur le blog :
 
 * _Né le_ : la date de naissance.
 * _Âge_ : le nombre d'années écoulées.
-* _Anniversaire dans_ : le nombre de jours avant le prochain anniversaire.
+* _Anniversaire dans_ : le nombre de jours avant le prochain anniversaire. Le jour même, la ligne devient « Anniversaire aujourd'hui ».
 
-La ligne « Anniversaire dans » est toujours affichée. On ne peut pas la cacher dans les réglages.
+La ligne de l'anniversaire est toujours affichée. On ne peut pas la cacher dans les réglages.
 
 ## Changer le style
 
@@ -69,7 +69,7 @@ Le widget lui-même porte la classe `bloganniv`, plus la classe que vous avez aj
 
 ## Bon à savoir
 
-* Si la date est invalide (par exemple `31/02/2020`, `2020-05-01` ou un texte), le widget ne s'affiche pas du tout. Aucun message ne le signale. Vérifiez le format `jj/mm/aaaa`.
-* Le jour de l'anniversaire, le compteur indique 0 jour et l'âge n'a pas encore augmenté. Il passe à l'âge suivant le lendemain.
-* Pour une date de naissance dans le futur, l'âge est calculé comme si la date était dans le passé. Évitez-le.
-* Un blog créé aujourd'hui affiche « Âge : 1 an » quand le champ date est vide.
+* Si la date est invalide (par exemple `31/02/2020`, `2020-05-01` ou un texte), le widget utilise la date de création du blog, comme si le champ était vide. Aucun message ne le signale : vérifiez la ligne « Né le » et le format `jj/mm/aaaa`.
+* Le jour de l'anniversaire, l'âge augmente d'un an.
+* Pour une date de naissance dans le futur, l'âge est de 0 an et le compteur donne le nombre de jours avant cette date.
+* Les dates sont calculées dans le fuseau horaire du blog.
