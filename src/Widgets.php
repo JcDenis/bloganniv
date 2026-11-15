@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\bloganniv;
 
+use DateTimeImmutable;
+use DateTimeZone;
 use Dotclear\App;
+use Exception;
 use Dotclear\Helper\Html\Html;
 use Dotclear\Plugin\widgets\WidgetsStack;
 use Dotclear\Plugin\widgets\WidgetsElement;
@@ -47,50 +50,37 @@ class Widgets
             return '';
         }
 
-        $ftdatecrea = is_string($w->__get('ftdatecrea')) ? $w->__get('ftdatecrea') : '';
-        //Si la date est vide nous recherchons la date en base
-        if (strlen(rtrim($ftdatecrea)) == 0) {
-            $jour       = date('d', App::blog()->creadt());
-            $mois       = date('m', App::blog()->creadt());
-            $annee      = date('Y', App::blog()->creadt());
-            $ftdatecrea = (string) date('d/m/Y', App::blog()->creadt());
-        } else {
-            [$jour, $mois, $annee] = explode('/', $ftdatecrea);
+        // Dates in blog time zone
+        try {
+            $tz = new DateTimeZone(is_string($tz = App::blog()->settings()->get('system')->get('blog_timezone')) && $tz !== '' ? $tz : 'UTC');
+        } catch (Exception) {
+            $tz = new DateTimeZone('UTC');
+        }
+        $today = new DateTimeImmutable('today', $tz);
+
+        // Born date from widget setting, or blog creation date if empty or invalid
+        $born       = null;
+        $ftdatecrea = is_string($w->__get('ftdatecrea')) ? trim($w->__get('ftdatecrea')) : '';
+        if (preg_match('#^(\d{1,2})/(\d{1,2})/(\d{4})$#', $ftdatecrea, $m) && checkdate((int) $m[2], (int) $m[1], (int) $m[3])) {
+            $born = (new DateTimeImmutable('today', $tz))->setDate((int) $m[3], (int) $m[2], (int) $m[1]);
+        }
+        if ($born === null) {
+            $born = (new DateTimeImmutable('@' . App::blog()->creadt()))->setTimezone($tz)->setTime(0, 0);
         }
 
-        $jour      = (int) $jour;
-        $mois      = (int) $mois;
-        $annee     = (int) $annee;
-        $nbrejours = 0;
-        $nbreannee = 0;
-        // Test si la date est valide
-        if (@checkdate($mois, $jour, $annee)) {
-            // Ok nous pouvons calculer la date anniversaire et le nombre de jours restant avant
-
-            //Extraction des données
-            $jour2  = (int) date('d');
-            $mois2  = (int) date('m');
-            $annee2 = (int) date('Y');
-
-            //Calcul des timestamp
-            $timestamp1 = mktime(0, 0, 0, $mois, $jour, $annee2); // La date anniversaire cette année
-            $timestamp2 = mktime(0, 0, 0, $mois2, $jour2, $annee2);
-            //Affichage du nombre de jour
-
-            //je regarde si la date anniv n'est pas passé
-            if (($timestamp2 - $timestamp1) > 0) {
-                $timestamp1 = mktime(0, 0, 0, $mois, $jour, $annee2 + 1);
-                $nbrejours  = round(abs(mktime(0, 0, 0, $mois2, $jour2, $annee2) - $timestamp1) / 86400);
-                $nbreannee  = abs($annee2 - $annee);
-            } else {
-                $nbrejours = abs($timestamp2 - $timestamp1) / 86400;
-                $nbreannee = abs($annee2 - $annee - 1);
+        if ($born > $today) {
+            // Future date: not born yet, count days until born date
+            $nbreannee = 0;
+            $next      = $born;
+        } else {
+            $nbreannee = $born->diff($today)->y;
+            $next      = $born->setDate((int) $today->format('Y'), (int) $born->format('m'), (int) $born->format('d'));
+            if ($next < $today) {
+                $next = $next->modify('+1 year');
             }
-            // abs($timestamp2 - $timestamp1)/(86400*7); //Affichage du nombre de semaine : 3.85
-        } else {
-            // date invalide
-            return '';
         }
+        // Count calendar days, not seconds, to be safe with daylight saving time
+        $nbrejours = (int) $today->diff($next)->days;
 
         return $w->renderDiv(
             (bool) $w->__get('content_only'),
@@ -98,9 +88,12 @@ class Widgets
             '',
             (is_string($w->__get('title')) && !empty($w->__get('title')) ? $w->renderTitle(Html::escapeHTML($w->__get('title'))) : '') .
             '<ul>' .
-            ($w->__get('dispyearborn') ? '<li>' . __('Born:') . ' <span class="annivne">' . $ftdatecrea . '</span></li>' : '') .
-            ($w->__get('dispyear') ? '<li>' . __('Age:') . ' <span class="annivan">' . $nbreannee . '</span> ' . __('year(s)') . '</li>' : '') .
-            '<li>' . __('Birthday in') . ' <span class="annivjrs">' . $nbrejours . '</span> ' . __('day(s)') . '</li>' .
+            ($w->__get('dispyearborn') ? '<li>' . __('Born:') . ' <span class="annivne">' . $born->format('d/m/Y') . '</span></li>' : '') .
+            ($w->__get('dispyear') ? '<li>' . __('Age:') . ' ' . sprintf(__('%s year', '%s years', $nbreannee), '<span class="annivan">' . $nbreannee . '</span>') . '</li>' : '') .
+            '<li>' . ($nbrejours === 0 ?
+                __('Birthday today') :
+                __('Birthday in') . ' ' . sprintf(__('%s day', '%s days', $nbrejours), '<span class="annivjrs">' . $nbrejours . '</span>')
+            ) . '</li>' .
             '</ul>'
         );
     }
