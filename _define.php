@@ -22,7 +22,7 @@ $this->registerModule(
     'Blog Anniv',
     'Show number of days before and after a given date',
     'Fran6t, Pierre Van Glabeke and Contributors',
-    '2.6',
+    '2.7',
     [
         'requires'    => [['core', '2.39']],
         'permissions' => 'My',
@@ -30,6 +30,6 @@ $this->registerModule(
         'support'     => 'https://github.com/JcDenis/' . $this->id . '/issues',
         'details'     => 'https://github.com/JcDenis/' . $this->id . '/',
         'repository'  => 'https://raw.githubusercontent.com/JcDenis/' . $this->id . '/master/dcstore.xml',
-        'date'        => '2026-08-12T17:40:10+00:00',
+        'date'        => '2026-11-15T09:33:49+00:00',
     ]
 );

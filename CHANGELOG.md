@@ -1,3 +1,9 @@
+bloganniv 2.7 - 2026.11.15
+===========================================================
+* [fix] Age and days count: birthday day, future and invalid dates, daylight saving time
+* [lang] Plural forms
+* [docs] Add a user guide in French, with screenshots
+
 bloganniv 2.6 - 2026.08.12
 ===========================================================
 * Bump Dotclear from 2.36 to 2.39
