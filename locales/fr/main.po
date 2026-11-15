@@ -28,12 +28,19 @@ msgstr "Né le :"
 msgid "Age:"
 msgstr "Âge :"
 
-msgid "year(s)"
-msgstr "an(s)"
 
 msgid "Birthday in"
 msgstr "Anniversaire dans"
 
-msgid "day(s)"
-msgstr "jour(s)"
+msgid "%s year"
+msgid_plural "%s years"
+msgstr[0] "%s an"
+msgstr[1] "%s ans"
 
+msgid "%s day"
+msgid_plural "%s days"
+msgstr[0] "%s jour"
+msgstr[1] "%s jours"
+
+msgid "Birthday today"
+msgstr "Anniversaire aujourd'hui"
